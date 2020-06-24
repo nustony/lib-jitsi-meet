@@ -702,6 +702,17 @@ TraceablePeerConnection.prototype._remoteTrackAdded = function(stream, track, tr
         return;
     }
 
+    if ((browser.usesPlanB() && !this.remoteDescription.sdp) || (!browser.usesPlanB() && !this.peerconnection.remoteDescription.sdp)) {
+      GlobalOnErrorHandler.callErrorHandler(
+        new Error(
+            `No media lines for type ${
+                mediaType} found in remote SDP for remote track: ${
+                streamId}`));
+
+        // Abort
+        return;
+    }
+
     const remoteSDP = browser.usesPlanB()
         ? new SDP(this.remoteDescription.sdp)
         : new SDP(this.peerconnection.remoteDescription.sdp);
