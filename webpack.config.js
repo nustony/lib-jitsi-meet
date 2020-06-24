@@ -79,8 +79,8 @@ const config = {
     },
     performance: {
         hints: minimize ? 'error' : false,
-        maxAssetSize: 750 * 1024,
-        maxEntrypointSize: 750 * 1024
+        maxAssetSize: 900 * 1024,
+        maxEntrypointSize: 900 * 1024
     },
     plugins: [
         analyzeBundle
